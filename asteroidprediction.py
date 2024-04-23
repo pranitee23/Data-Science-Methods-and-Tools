@@ -7,7 +7,7 @@ import joblib
 #import plotly.express as px
  
 # Load the model
-model = joblib.load('/workspaces/Data-Science-Methods-and-Tools/RandomForest_final.pkl')
+model = joblib.load('RandomForest_final.pkl')
  
 # Function to predict hazardous status and probabilities
 def predict_hazardous(features):
