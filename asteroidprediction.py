@@ -1,13 +1,10 @@
-# -*- coding: utf-8 -*-
-"""AsteroidPrediction.ipynb
-
 import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import joblib
-import plotly.express as px
+#import plotly.express as px
  
 # Load the model
 model = joblib.load('/workspaces/Data-Science-Methods-and-Tools/RandomForest_final.pkl')
@@ -36,15 +33,15 @@ def plot_feature_importance(model, df):
     st.pyplot(fig)
  
 # Function to plot probability bar chart using Plotly
-def plot_probability_chart(probability):
-    data = pd.DataFrame({
-        'Category': ['Non-Hazardous', 'Hazardous'],
-        'Probability': probability
-    })
-    fig = px.bar(data, x='Category', y='Probability', title="Probability of Hazardous Status",
-                 labels={'Probability': 'Probability', 'Category': 'Status'},
-                 color='Category', color_discrete_map={'Non-Hazardous': 'blue', 'Hazardous': 'red'})
-    st.plotly_chart(fig)
+# def plot_probability_chart(probability):
+#     data = pd.DataFrame({
+#         'Category': ['Non-Hazardous', 'Hazardous'],
+#         'Probability': probability
+#     })
+#     fig = px.bar(data, x='Category', y='Probability', title="Probability of Hazardous Status",
+#                  labels={'Probability': 'Probability', 'Category': 'Status'},
+#                  color='Category', color_discrete_map={'Non-Hazardous': 'blue', 'Hazardous': 'red'})
+#     st.plotly_chart(fig)
  
 # Custom Streamlit configuration
 st.set_page_config(page_title='Asteroid Hazard Prediction', layout='wide')
@@ -118,10 +115,10 @@ if show_graphs:
     st.subheader('Feature Importance')
     plot_feature_importance(model, features)
  
-    # Plot probability chart
-    st.subheader('Probability Chart')
-    _, probability = predict_hazardous(features)
-    plot_probability_chart(probability)
+    # # Plot probability chart
+    # st.subheader('Probability Chart')
+    # _, probability = predict_hazardous(features)
+    # plot_probability_chart(probability)
  
    
 # Additional feature information section
@@ -156,9 +153,3 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
-
-from joblib import dump
-
-# Assuming your logistic regression model is named 'logreg_model'
-# Save the model to a file
-dump(logreg_model, 'logistic_regression_model.pkl')
