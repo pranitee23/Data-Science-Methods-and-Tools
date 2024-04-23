@@ -20,7 +20,7 @@ def create_features(user_inputs):
     features = pd.DataFrame([user_inputs])
     return features
  
-# Function to plot feature importance
+# Function to plot feature importance of columns 
 def plot_feature_importance(model, df):
     importances = model.feature_importances_
     indices = np.argsort(importances)[::-1]
