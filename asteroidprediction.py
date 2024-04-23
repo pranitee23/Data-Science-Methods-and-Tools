@@ -4,10 +4,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import joblib
-#import plotly.express as px
+import plotly.express as px
  
 # Load the model
-model = joblib.load('RandomForest_final.pkl')
+model = joblib.load('/workspaces/Data-Science-Methods-and-Tools/RandomForest_final.pkl')
  
 # Function to predict hazardous status and probabilities
 def predict_hazardous(features):
@@ -20,7 +20,7 @@ def create_features(user_inputs):
     features = pd.DataFrame([user_inputs])
     return features
  
-# Function to plot feature importance of columns 
+# Function to plot feature importance
 def plot_feature_importance(model, df):
     importances = model.feature_importances_
     indices = np.argsort(importances)[::-1]
@@ -33,15 +33,15 @@ def plot_feature_importance(model, df):
     st.pyplot(fig)
  
 # Function to plot probability bar chart using Plotly
-# def plot_probability_chart(probability):
-#     data = pd.DataFrame({
-#         'Category': ['Non-Hazardous', 'Hazardous'],
-#         'Probability': probability
-#     })
-#     fig = px.bar(data, x='Category', y='Probability', title="Probability of Hazardous Status",
-#                  labels={'Probability': 'Probability', 'Category': 'Status'},
-#                  color='Category', color_discrete_map={'Non-Hazardous': 'blue', 'Hazardous': 'red'})
-#     st.plotly_chart(fig)
+def plot_probability_chart(probability):
+    data = pd.DataFrame({
+        'Category': ['Non-Hazardous', 'Hazardous'],
+        'Probability': probability
+    })
+    fig = px.bar(data, x='Category', y='Probability', title="Probability of Hazardous Status",
+                 labels={'Probability': 'Probability', 'Category': 'Status'},
+                 color='Category', color_discrete_map={'Non-Hazardous': 'blue', 'Hazardous': 'red'})
+    st.plotly_chart(fig)
  
 # Custom Streamlit configuration
 st.set_page_config(page_title='Asteroid Hazard Prediction', layout='wide')
@@ -115,10 +115,10 @@ if show_graphs:
     st.subheader('Feature Importance')
     plot_feature_importance(model, features)
  
-    # # Plot probability chart
-    # st.subheader('Probability Chart')
-    # _, probability = predict_hazardous(features)
-    # plot_probability_chart(probability)
+    # Plot probability chart
+    st.subheader('Probability Chart')
+    _, probability = predict_hazardous(features)
+    plot_probability_chart(probability)
  
    
 # Additional feature information section
